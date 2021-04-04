@@ -8,7 +8,7 @@ class WebexHandler(logging.Handler):
     """
 
     # Define a log level above INFO but below warning.
-    NOTICE = 35
+    NOTICE = logging.INFO + 5
 
     headers = {"Content-type": "application/json"}
 

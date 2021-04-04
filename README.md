@@ -23,6 +23,7 @@ from webex_handler import WebexHandler
 logger = logging.getLogger(__name__)
 # The notice level is more severe than INFO but not as severe as WARNING.
 logger.setLevel(WebexHandler.NOTICE)
+logging.addLevelName(WebexHandler.NOTICE, "NOTICE")
 
 wx = WebexHandler("https://webexapis.com/v1/webhooks/incoming/...")
 wx.setLevel(WebexHandler.NOTICE)
@@ -31,6 +32,8 @@ formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(messag
 wx.setFormatter(formatter)
 
 logger.addHandler(wx)
+
+logger.log(WebexHandler.NOTICE, "Logging from Python!")
 ```
 
 Et voilà!
