@@ -34,6 +34,7 @@ logger.addHandler(wx)
 ```
 
 Et voilà!
+
 ![screenshot](static_content/example.png "Example Result")
 
 ## Other Info
