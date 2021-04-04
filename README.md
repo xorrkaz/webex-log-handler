@@ -33,6 +33,9 @@ wx.setFormatter(formatter)
 logger.addHandler(wx)
 ```
 
+Et voilà!
+![screenshot](static_content/example.png "Example Result")
+
 ## Other Info
 
 The WebexHandler uses markdown-formatted messages by default, but you can pass `use_markdown=False` to the WebexHandler constructor to use plain text.
