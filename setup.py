@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="webex_handler",
-    version="1.0.0",
+    version="1.1.0",
     description="A python logging handler that logs to Webex incoming webhooks",
     url="https://gitlab.systems.cll.cloud/jclarke/webex-log-handler",
     author="Joe Clarke",

@@ -1,5 +1,6 @@
 import logging
 import requests
+import time
 
 
 class WebexHandler(logging.Handler):
@@ -42,5 +43,15 @@ class WebexHandler(logging.Handler):
 
             r = requests.post(self.url, headers=self.headers, json=payload)
             r.raise_for_status()
+        except requests.HTTPError as e:
+            if e.response.status_code == 429:
+                sleep_time = int(e.response.headers.get("retry-after"))
+                while sleep_time > 10:
+                    time.sleep(10)
+                    sleep_time -= 10
+
+                time.sleep(sleep_time)
+            else:
+                self.handleError(record)
         except Exception:
             self.handleError(record)
