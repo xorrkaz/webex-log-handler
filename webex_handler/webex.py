@@ -32,26 +32,30 @@ class WebexHandler(logging.Handler):
         The record is formatted and then sent to Webex. If
         exception information is present, it is NOT sent to the server.
         """
-        try:
-            msg = self.format(record)
+        msg = self.format(record)
 
-            payload = {}
-            if self.use_markdown:
-                payload["markdown"] = msg
-            else:
-                payload["text"] = msg
+        payload = {}
+        if self.use_markdown:
+            payload["markdown"] = msg
+        else:
+            payload["text"] = msg
 
-            r = requests.post(self.url, headers=self.headers, json=payload)
-            r.raise_for_status()
-        except requests.HTTPError as e:
-            if e.response.status_code == 429:
-                sleep_time = int(e.response.headers.get("retry-after"))
-                while sleep_time > 10:
-                    time.sleep(10)
-                    sleep_time -= 10
+        while True:
+            try:
+                r = requests.post(self.url, headers=self.headers, json=payload)
+                r.raise_for_status()
+                break
+            except requests.HTTPError as e:
+                if e.response.status_code == 429:
+                    sleep_time = int(e.response.headers.get("retry-after"))
+                    while sleep_time > 10:
+                        time.sleep(10)
+                        sleep_time -= 10
 
-                time.sleep(sleep_time)
-            else:
+                    time.sleep(sleep_time)
+                else:
+                    self.handleError(record)
+                    break
+            except Exception:
                 self.handleError(record)
-        except Exception:
-            self.handleError(record)
+                break
