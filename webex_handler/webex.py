@@ -1,6 +1,7 @@
 import logging
 import requests
 import time
+import threading
 
 
 class WebexHandler(logging.Handler):
@@ -40,6 +41,10 @@ class WebexHandler(logging.Handler):
         else:
             payload["text"] = msg
 
+        thr = threading.Thread(target=self._send_msg, name="WebexMsgSender", kwargs={"payload": payload, "record": record})
+        thr.start()
+
+    def _send_msg(self, payload, record):
         while True:
             try:
                 r = requests.post(self.url, headers=self.headers, json=payload)
