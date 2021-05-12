@@ -4,7 +4,7 @@ import asyncio
 import logging
 
 
-class WebexHandler(base.Handler):
+class AsyncWebexHandler(base.Handler):
     """
     A handler class which sends log messages to a Webex incoming webhook.
     """
@@ -45,8 +45,6 @@ class WebexHandler(base.Handler):
             payload["markdown"] = msg
         else:
             payload["text"] = msg
-
-        print(msg)
 
         async with aiohttp.ClientSession() as session:
             while True:
