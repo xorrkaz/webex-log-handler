@@ -36,6 +36,40 @@ logger.addHandler(wx)
 logger.log(WebexHandler.NOTICE, "Logging from Python!")
 ```
 
+If you are using asyncio, there is an async version of the handler as well.  It requires the `aiolog` and `aiohttp` packages, though.  To use it:
+
+```bash
+pip install aiolog aiohttp
+```
+
+```python
+import asyncio
+import aiolog
+import logging
+from webex_handler import AsyncWebexHandler
+
+logger = logging.getLogger(__name__)
+# The notice level is more severe than INFO but not as severe as WARNING.
+logger.setLevel(AsyncWebexHandler.NOTICE)
+logging.addLevelName(AsyncWebexHandler.NOTICE, "NOTICE")
+
+wx = AsyncWebexHandler("https://webexapis.com/v1/webhooks/incoming/...")
+wx.setLevel(AsyncWebexHandler.NOTICE)
+
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+wx.setFormatter(formatter)
+
+logger.addHandler(wx)
+
+async def do_work():
+    logger.log(AsyncWebexHandler.NOTICE, "Logging from Python!")
+
+aiolog.start()
+loop = asyncio.get_event_loop()
+loop.run_until_complete(do_work())
+loop.run_until_complete(aiolog.stop())
+```
+
 Et voilà!
 
 ![screenshot](static_content/example.png "Example Result")
