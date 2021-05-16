@@ -52,11 +52,7 @@ class AsyncWebexHandler(base.Handler):
                     if resp.status < 300:
                         break
                     elif resp.status == 429:
-                        sleep_time = int(resp.headers.get("retry-after"))
-                        while sleep_time > 10:
-                            await asyncio.sleep(10)
-                            sleep_time -= 10
-
-                        await asyncio.sleep(sleep_time)
+                        wait = int(resp.headers.get("retry-after"))
+                        await asyncio.sleep(wait)
                     else:
                         break
