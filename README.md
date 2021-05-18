@@ -1,6 +1,6 @@
 # Webex Logging Handler
 
-This is a simple Python logging handler that emits messages to Webex [incoming Webhooks](https://apphub.webex.com/messaging/applications/incoming-webhooks-cisco-systems-38054).
+This is a simple Python logging handler that emits messages to Webex [incoming Webhooks](https://apphub.webex.com/messaging/applications/incoming-webhooks-cisco-systems-38054).  It does not block trying to send messages, and instead uses threading (in the non-async version) to send the message and handle rate limiting.
 
 ## Installing
 
