@@ -4,7 +4,7 @@ setup(
     name="webex_handler",
     version="2.0.0",
     description="A python logging handler that logs to Webex incoming webhooks",
-    url="https://gitlab.systems.cll.cloud/jclarke/webex-log-handler",
+    url="https://github.com/xorrkaz/webex-log-handler",
     author="Joe Clarke",
     author_email="jclarke@cisco.com",
     license="MIT",
