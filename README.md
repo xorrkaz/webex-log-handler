@@ -78,4 +78,4 @@ Et voilà!
 
 The WebexHandler uses markdown-formatted messages by default, but you can pass `use_markdown=False` to the WebexHandler constructor to use plain text.
 
-Also, be cognizant than a high level (like INFO or DEBUG) can make things very chatty in Webex.  Consider a lower level to minimize noise.
+Also, be cognizant that a high level (like INFO or DEBUG) can make things very chatty in Webex.  Consider a lower level to minimize noise.
