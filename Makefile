@@ -21,10 +21,14 @@ lint: ## check style with flake8
 	flake8
 
 dist: clean ## builds source and wheel package
-	# Build virlutils
+	# Build webex-log-handler
 	python setup.py sdist
 	python setup.py bdist_wheel
 	ls -l dist
 
 install: clean ## install the package to the active Python's site-packages
 	python setup.py install
+
+release: dist ## package and upload a release
+	@echo "*** Uploading webex-log-handler... ***"
+	twine upload dist/webex*

@@ -7,7 +7,7 @@ This is a simple Python logging handler that emits messages to Webex [incoming W
 To install run:
 
 ```bash
-python -m pip install git+https://github.com/xorrkaz/webex-log-handler.git
+pip install webex-handler
 ```
 
 ## Usage
